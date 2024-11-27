@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Técnicos</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+    <nav>
+        <ul class="menu">
+            <li><a href="/dashboard">Dashboard</a></li>
+            <li><a href="/tecnicos">Técnicos</a></li>
+            <li><a href="/ubicaciones">Ubicaciones</a></li>
+            <li><a href="/dispositivos">Dispositivos</a></li>
+            <li><a href="/incidencias">Incidencias</a></li>
+            <li><a href="/logout">Salir</a></li>
+        </ul>
+    </nav>
+
+    <main id="content">
+        <section>
+            <h2>Gestión de Técnicos</h2>
+            <form method="POST" action="/tecnicos">
+                <label for="nombre">Nombre:</label>
+                <input type="text" id="nombre" name="nombre" required>
+
+                <label for="apellido">Apellido:</label>
+                <input type="text" id="apellido" name="apellido" required>
+
+                <label for="especialidad">Especialidad:</label>
+                <select id="especialidad" name="especialidad" required>
+                    <option value="" disabled selected>Selecciona una especialidad</option>
+                    <option value="Equipos de cómputo">Equipos de cómputo</option>
+                    <option value="Mantenimiento">Mantenimiento</option>
+                    <option value="Audiovisuales">Audiovisuales</option>
+                    <option value="Electricidad">Electricidad</option>
+                    <option value="Redes">Redes</option>
+                </select>
+
+                <label for="correo">Correo:</label>
+                <input type="email" id="correo" name="correo" required>                
+
+                <label for="contrasena">Contraseña:</label>
+                <input type="password" id="contrasena" name="contrasena" required>
+
+                <button type="submit">Registrar Técnico</button>
+            </form>
+        </section>
+
+        <section>
+            <h2>Técnicos Registrados</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Nombre</th>
+                        <th>Apellido</th>
+                        <th>Especialidad</th>
+                        <th>Correo</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% tecnicos.forEach(tecnico => { %>
+                        <tr>
+                            <td><%= tecnico.id %></td>
+                            <td><%= tecnico.nombre %></td>
+                            <td><%= tecnico.apellido %></td>
+                            <td><%= tecnico.especialidad %></td>
+                            <td><%= tecnico.correo %></td>
+                        </tr>
+                    <% }) %>
+                </tbody>
+            </table>
+        </section>
+    </main>
+</body>
+</html>

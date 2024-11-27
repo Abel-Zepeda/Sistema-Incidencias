@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ubicaciones</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+    <nav>
+        <ul class="menu">
+            <li><a href="/dashboard">Dashboard</a></li>
+            <li><a href="/tecnicos">Técnicos</a></li>
+            <li><a href="/ubicaciones">Ubicaciones</a></li>
+            <li><a href="/dispositivos">Dispositivos</a></li>
+            <li><a href="/incidencias">Incidencias</a></li>
+            <li><a href="/logout">Salir</a></li>
+        </ul>
+    </nav>
+  
+    <main>
+        <section id="content">
+            <h1>GESTIÓN DE UBICACIONES</h1>
+            <form method="POST" action="/ubicaciones">
+                <label for="edificio">Edificio:</label>
+                <select id="edificio" name="edificio" required>
+                    <option value="" disabled selected>Selecciona un edificio</option>
+                    <% edificios.forEach(edificio => { %>
+                        <option value="<%= edificio.edificio %>"><%= edificio.edificio %></option>
+                    <% }) %>
+                </select>
+
+                <label for="aula">Aula:</label>
+                <input type="text" id="aula" name="aula" required>
+
+                <button type="submit">Registrar Ubicación</button>
+            </form>
+        </section>
+
+        <section id="content">
+            <h2>Ubicaciones Registradas</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Edificio</th>
+                        <th>Aula</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% ubicaciones.forEach(ubicacion => { %>
+                        <tr>
+                            <td><%= ubicacion.id %></td>
+                            <td><%= ubicacion.edificio %></td>
+                            <td><%= ubicacion.aula %></td>
+                        </tr>
+                    <% }) %>
+                </tbody>
+            </table>
+        </section>
+    </main>
+</body>
+</html>

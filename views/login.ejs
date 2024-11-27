@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sistema de Incidencias - Login</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body>
+    <div id="login-container">
+        <h2>Iniciar Sesión</h2>
+        <form id="login-form" action="/login" method="POST">
+            <label for="username">Usuario:</label>
+            <input type="text" id="username" name="username" required>
+
+            <label for="password">Contraseña:</label>
+            <input type="password" id="password" name="password" required>
+
+            <button type="submit">Iniciar sesión</button>
+        </form>
+        <div id="error-message">
+            <% if (error) { %>
+                <p><%= error %></p>
+            <% } %>
+        </div>
+    </div>
+</body>
+</html>

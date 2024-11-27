@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Incidencias</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+    <nav>
+        <ul class="menu">
+            <li><a href="/dashboard">Dashboard</a></li>
+            <li><a href="/tecnicos">Técnicos</a></li>
+            <li><a href="/ubicaciones">Ubicaciones</a></li>
+            <li><a href="/dispositivos">Dispositivos</a></li>
+            <li><a href="/incidencias">Incidencias</a></li>
+            <li><a href="/logout">Salir</a></li>
+        </ul>
+    </nav>
+  
+    <main>
+        <section id="content">
+            <h1>GESTIÓN DE INCIDENCIAS</h1>
+            <form method="POST" action="/incidencias">
+                <label for="edificio">Edificio:</label>
+                <select id="edificio" name="edificio" required>
+                    <option value="" disabled selected>Selecciona un edificio</option>
+                    <% edificios.forEach(edificio => { %>
+                        <option value="<%= edificio.edificio %>"><%= edificio.edificio %></option>
+                    <% }) %>
+                </select>
+
+                <label for="aula">Aula:</label>
+                <select id="aula" name="aula" required>
+                    <option value="" disabled selected>Selecciona un aula</option>
+                </select>
+
+                <label for="tipo_incidencia">Tipo de Incidencia:</label>
+                <select id="tipo_incidencia" name="tipo_incidencia" required>
+                    <option value="" disabled selected>Selecciona un tipo de incidencia</option>
+                    <% tiposIncidencia.forEach(tipo => { %>
+                      <option value="<%= tipo.tipo_incidencia %>"><%= tipo.tipo_incidencia %></option>
+                    <% }) %>
+                  </select>
+                               
+                
+                <label for="descripcion">Descripción:</label>
+                <textarea id="descripcion" name="descripcion" required></textarea>
+
+                <label for="horario">Horario:</label>
+                <input type="datetime-local" id="horario" name="horario" required>
+
+                <button type="submit">Registrar Incidencia</button>
+            </form>
+        </section>
+
+        <section id="content">
+            <h2>Incidencias Registradas</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Edificio</th>
+                        <th>Aula</th>
+                        <th>Tipo de Incidencia</th>
+                        <th>Descripción</th>
+                        <th>Horario</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% incidencias.forEach(incidencia => { %>
+                        <tr>
+                            <td><%= incidencia.id %></td>
+                            <td><%= incidencia.edificio %></td>
+                            <td><%= incidencia.aula %></td>
+                            <td><%= incidencia.tipo_incidencia %></td>
+                            <td><%= incidencia.descripcion %></td>
+                            <td><%= incidencia.horario %></td>
+                        </tr>
+                    <% }) %>
+                </tbody>
+            </table>
+        </section>
+    </main>
+
+   <!-- Script para cargar aulas y tipos de incidencia dinámicamente -->
+<script>
+   document.getElementById('edificio').addEventListener('change', async function () {
+    const edificio = this.value; // Obtiene el valor seleccionado
+    console.log(`Edificio seleccionado: ${edificio}`); // Verifica el valor seleccionado
+    const aulasDropdown = document.getElementById('aula');
+
+    // Limpia las opciones actuales
+    aulasDropdown.innerHTML = '<option value="">Selecciona una aula</option>';
+
+    if (edificio) {
+        try {
+            const response = await fetch(`/aulas/${edificio}`);
+            const aulas = await response.json();
+            console.log(`Aulas recibidas: ${JSON.stringify(aulas)}`); // Verifica las aulas que devuelve el servidor
+
+            // Agrega las opciones al dropdown
+            aulas.forEach((aula) => {
+                const option = document.createElement('option');
+                option.value = aula.aula;
+                option.textContent = aula.aula;
+                aulasDropdown.appendChild(option);
+            });
+        } catch (error) {
+            console.error('Error al cargar las aulas:', error);
+        }
+    }
+});
+
+</script>
+    <script>
+        // Cargar los tipos de incidencia cuando la página se carga
+        fetch('/tipos_incidencia')
+            .then(response => response.json())
+            .then(data => {
+                const tipoSelect = document.getElementById('tipo_incidencia');
+                
+                // Agrega los tipos de incidencia al select
+                data.forEach(tipo => {
+                    const option = document.createElement('option');
+                    option.value = tipo.tipo_incidencia;
+                    option.textContent = tipo.tipo_incidencia;
+                    tipoSelect.appendChild(option);
+                });
+            })
+            .catch(error => console.error('Error al obtener tipos de incidencia:', error));
+    </script>
+</body>
+</html>

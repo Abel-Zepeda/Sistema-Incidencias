@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registrar Dispositivos</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+    <nav>
+        <ul class="menu">
+            <li><a href="/dashboard">Dashboard</a></li>
+            <li><a href="/tecnicos">Técnicos</a></li>
+            <li><a href="/ubicaciones">Ubicaciones</a></li>
+            <li><a href="/dispositivos">Dispositivos</a></li>
+            <li><a href="/incidencias">Incidencias</a></li>
+            <li><a href="/logout">Salir</a></li>
+        </ul>
+    </nav>
+    <header>
+        <h1>Gestión de Dispositivos</h1>
+    </header>
+    <main>
+        <section>
+            <form method="POST" action="/dispositivos">
+                <label for="numero_serie">Número de Serie:</label>
+                <input type="text" id="numero_serie" name="numero_serie" required>
+
+                <label for="categoria">Categoría:</label>
+                <input type="text" id="categoria" name="categoria">
+
+                <label for="marca">Marca:</label>
+                <input type="text" id="marca" name="marca">
+
+                <label for="procesador">Procesador:</label>
+                <input type="text" id="procesador" name="procesador">
+
+                <label for="ram">RAM:</label>
+                <input type="text" id="ram" name="ram">
+
+                <label for="capacidad_almacenamiento">Capacidad de Almacenamiento:</label>
+                <input type="text" id="capacidad_almacenamiento" name="capacidad_almacenamiento">
+
+                <label for="tarjeta_grafica">Tarjeta Gráfica:</label>
+                <input type="text" id="tarjeta_grafica" name="tarjeta_grafica">
+
+                <label for="sistema_operativo">Sistema Operativo:</label>
+                <input type="text" id="sistema_operativo" name="sistema_operativo">
+
+                <label for="version_sistema">Versión del Sistema Operativo:</label>
+                <input type="text" id="version_sistema" name="version_sistema">
+
+                <label for="fecha_adquisicion">Fecha de Adquisición:</label>
+                <input type="date" id="fecha_adquisicion" name="fecha_adquisicion">
+
+                <button type="submit">Registrar Dispositivo</button>
+            </form>
+        </section>
+
+        <section id="content">
+            <h2>Dispositivos Registrados</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Número de Serie</th>
+                        <th>Categoría</th>
+                        <th>Marca</th>
+                        <th>Procesador</th>
+                        <th>RAM</th>
+                        <th>Almacenamiento</th>
+                        <th>Tarjeta Gráfica</th>
+                        <th>Sistema Operativo</th>
+                        <th>Versión</th>
+                        <th>Fecha de Adquisición</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% dispositivos.forEach(dispositivo => { %>
+                        <tr>
+                            <td><%= dispositivo.id %></td>
+                            <td><%= dispositivo.numero_serie %></td>
+                            <td><%= dispositivo.categoria || 'N/A' %></td>
+                            <td><%= dispositivo.marca || 'N/A' %></td>
+                            <td><%= dispositivo.procesador || 'N/A' %></td>
+                            <td><%= dispositivo.ram || 'N/A' %></td>
+                            <td><%= dispositivo.capacidad_almacenamiento || 'N/A' %></td>
+                            <td><%= dispositivo.tarjeta_grafica || 'N/A' %></td>
+                            <td><%= dispositivo.sistema_operativo || 'N/A' %></td>
+                            <td><%= dispositivo.version_sistema || 'N/A' %></td>
+                            <td><%= dispositivo.fecha_adquisicion %></td>
+                        </tr>
+                    <% }) %>
+                </tbody>
+            </table>
+        </section>
+    </main>
+</body>
+</html>

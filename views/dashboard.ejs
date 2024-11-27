@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+  <nav>
+    <ul class="menu">
+        <li><a href="/dashboard">Dashboard</a></li>
+        <li><a href="/tecnicos">Técnicos</a></li>
+        <li><a href="/ubicaciones">Ubicaciones</a></li>
+        <li><a href="/dispositivos">Dispositivos</a></li>
+        <li><a href="/incidencias">Incidencias</a></li>
+        <li><a href="/logout">Salir</a></li>
+    </ul>
+    </nav>
+    <main id="content">
+        <h1>Dashboard</h1>
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Edificio</th>
+                    <th>Aula</th>
+                    <th>Descripción</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% incidencias.forEach(function(incidencia) { %>
+                    <tr>
+                        <td><%= incidencia.id %></td>
+                        <td><%= incidencia.edificio %></td>
+                        <td><%= incidencia.aula %></td>
+                        <td><%= incidencia.descripcion %></td>
+                    </tr>
+                <% }); %>
+            </tbody>
+        </table>
+    </main>
+</body>
+</html>

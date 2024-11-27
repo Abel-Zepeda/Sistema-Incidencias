@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sistema de Incidencias</title>
+    <link rel="stylesheet" href="/css/style.css">
+    <script src="/scripts/incidencias.js"></script>
+    
+    
+</head>
+<body>
+    <nav>
+        <ul class="menu">
+            <li><a href="/dashboard">Dashboard</a></li>
+            <li><a href="/tecnicos">Técnicos</a></li>
+            <li><a href="/ubicaciones">Ubicaciones</a></li>
+        </ul>
+    </nav>
+    <main id="content">
+        <!-- Aquí se cargará el contenido dinámico -->
+    </main>
+    <div>
+        <h2>Registrar Incidencia</h2>
+        <form id="form-incidencia">
+            <label for="edificio">Edificio:</label>
+            <select id="edificio" name="edificio" required>
+                <!-- Opciones cargadas dinámicamente -->
+            </select>
+    
+            <label for="aula">Aula:</label>
+            <select id="aula" name="aula" required>
+                <option value="">Selecciona un edificio primero</option>
+            </select>
+    
+            <label for="tipo">Tipo de incidencia:</label>
+            <select id="tipo" name="tipo" required>
+                <option value="falla_proyector">Falla de Proyector</option>
+                <option value="falla_mouse">Falla de Mouse</option>
+                <option value="no_internet">No hay Internet</option>
+                <option value="otra">Otra opción</option>
+            </select>
+    
+            <label for="descripcion">Descripción:</label>
+            <textarea id="descripcion" name="descripcion" rows="3"></textarea>
+    
+            <label for="horario">Horario:</label>
+            <input type="time" id="horario" name="horario" required>
+    
+            <button type="submit">Registrar Incidencia</button>
+        </form>
+    </div>
+    
+    <script src="/scripts/incidencias.js"></script>
+    
+</body>
+</html>
